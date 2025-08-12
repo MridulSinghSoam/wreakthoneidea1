@@ -1,0 +1,84 @@
+<!-- sandwich.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandwich Scanner</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    cursor: url('https://cur.cursors-4u.net/food/foo-4/foo348.cur'), auto;
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #f06292;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: #ec407a;
+  }
+  video, canvas {
+    margin-top: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+<body>
+<h1>🥪 Sandwich Health Scanner</h1>
+<p>Take a photo of your sandwich and let our totally serious AI rate its healthiness.</p>
+
+<video id="video" width="320" height="240" autoplay></video>
+<br>
+<button onclick="capturePhoto()">📸 Capture Sandwich</button>
+<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+<p id="rating"></p>
+
+<script>
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => {
+    document.getElementById('video').srcObject = stream;
+  })
+  .catch(err => {
+    alert('Camera access denied or not available.');
+  });
+
+async function capturePhoto(){
+  let video = document.getElementById('video');
+  let canvas = document.getElementById('canvas');
+  let ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  canvas.style.display = 'block';
+
+  // Convert canvas to base64 image data
+  let imageData = canvas.toDataURL('image/png');
+
+  document.getElementById('rating').innerText = 'Analyzing your sandwich with advanced AI...';
+
+  try {
+    // Fake AI API request simulation
+    // Replace this with actual AI endpoint if available
+    await new Promise(r => setTimeout(r, 2000)); // Simulated processing time
+    let aiRating = Math.floor(Math.random() * 10) + 1; // Replace with real AI output
+    document.getElementById('rating').innerText = `AI Health rating: ${aiRating}/10`;
+  } catch (error) {
+    document.getElementById('rating').innerText = 'AI failed to analyze your sandwich. Probably too delicious.';
+  }
+}
+</script>
+
+<a href="index.html">← Back to Home</a>
+</body>
+</html>

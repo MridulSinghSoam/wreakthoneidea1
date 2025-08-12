@@ -1,0 +1,154 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifewaster3000</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1b0034, #090015);
+    color: white;
+    cursor: url('https://cur.cursors-4u.net/others/oth-7/oth683.cur'), auto;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(255,255,255,0.05);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #ff00ff;
+  }
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6rem 3rem 3rem;
+    background: linear-gradient(135deg, #2e026d, #0a003a);
+  }
+  .hero-text {
+    max-width: 600px;
+    animation: fadeInUp 1.5s ease;
+  }
+  .hero-text h1 {
+    font-size: 3.5rem;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-text p {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+  .buttons {
+    margin-top: 2rem;
+  }
+  .buttons a {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 1rem;
+    transition: transform 0.2s;
+  }
+  .buttons a:hover {
+    transform: scale(1.1);
+  }
+  .hero img {
+    width: 450px;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    text-align: center;
+  }
+  .emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h2>Lifewaster3000</h2>
+    <nav>
+      <a href="#mining">Mining</a>
+      <a href="#breaks">Breaks</a>
+      <a href="#navigation">Navigation</a>
+      <a href="#sandwich">Sandwich</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1>LET YOUR MIND WASTE AWAY</h1>
+      <p>Experience the most impractical, financially inviable tools that never lie about their uselessness.</p>
+      <div class="buttons">
+        <a href="#mining">Explore</a>
+        <a href="#sandwich">Try Now</a>
+      </div>
+    </div>
+    <img src="https://i.ibb.co/m6qWJZs/vr-character.png" alt="VR character">
+  </div>
+
+  <section id="mining" style="background: linear-gradient(135deg, #ff4b1f, #1fddff);">
+    <div class="emoji">💰</div>
+    <h1>Worthlesscoin Mining</h1>
+    <p>Mine fake coins, merge with ETH, reset at midnight. Pure nonsense.</p>
+    <a href="mine.html">Start Mining</a>
+  </section>
+
+  <section id="breaks" style="background: linear-gradient(135deg, #56ab2f, #a8e063);">
+    <div class="emoji">☕</div>
+    <h1>Mandatory Breaks</h1>
+    <p>Get forced breaks at the worst possible times.</p>
+    <a href="breaks.html">Take a Break</a>
+  </section>
+
+  <section id="navigation" style="background: linear-gradient(135deg, #614385, #516395);">
+    <div class="emoji">🗺️</div>
+    <h1>Bad Navigation</h1>
+    <p>Random directions to unknown places. Guaranteed confusion.</p>
+    <a href="navigation.html">Get Lost</a>
+  </section>
+
+  <section id="sandwich" style="background: linear-gradient(135deg, #ff9966, #ff5e62);">
+    <div class="emoji">🥪</div>
+    <h1>Sandwich Scanner</h1>
+    <p>AI rates your sandwich healthiness. 100% trustworthy* (*not really).</p>
+    <a href="sandwich.html">Scan Sandwich</a>
+  </section>
+</body>
+</html>

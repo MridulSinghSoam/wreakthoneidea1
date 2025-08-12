@@ -1,0 +1,110 @@
+<!-- mine.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worthlesscoin Mining</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    cursor: url('https://cur.cursors-4u.net/others/oth-7/oth683.cur'), auto;
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    margin: 0.5rem;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: #e68900;
+  }
+  #wallet-info {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    white-space: pre-line;
+  }
+</style>
+</head>
+<body>
+<h1>💰 Worthlesscoin Mining</h1>
+<p>Connect your MetaMask wallet, click "Get Coin" to earn fake coins, and optionally combine your real ETH balance into your Worthlesscoin total (just for display). Balances reset at midnight.</p>
+
+<button id="connectButton">🔗 Connect MetaMask</button>
+<button id="getCoinButton">🪙 Get Coin</button>
+<button id="combineButton">➕ Combine ETH & WC</button>
+<div id="wallet-info"></div>
+
+<script>
+let account;
+let coinBalance = 0;
+let ethBalance = 0;
+let combinedMode = false;
+
+// Reset coins at midnight
+function scheduleMidnightReset() {
+  const now = new Date();
+  const msUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
+  setTimeout(() => {
+    coinBalance = Math.floor(ethBalance * 100);
+    combinedMode = false;
+    updateDisplay();
+    scheduleMidnightReset();
+  }, msUntilMidnight);
+}
+
+function updateDisplay() {
+  let displayWC = combinedMode ? coinBalance + Math.floor(ethBalance * 100) : coinBalance;
+  document.getElementById('wallet-info').innerText = `Connected wallet: ${account || 'Not connected'}\nReal ETH balance: ${ethBalance} ETH\nWorthlesscoin balance: ${displayWC} WC`;
+}
+
+async function connectMetaMask() {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      account = accounts[0];
+      const balanceWei = await ethereum.request({ method: 'eth_getBalance', params: [account, 'latest'] });
+      ethBalance = parseFloat(parseInt(balanceWei, 16) / 1e18).toFixed(4);
+      coinBalance = Math.floor(ethBalance * 100);
+      updateDisplay();
+    } catch (error) {
+      document.getElementById('wallet-info').innerText = 'Connection rejected.';
+    }
+  } else {
+    alert('MetaMask is not installed. Please install it to continue.');
+  }
+}
+
+function getCoin() {
+  coinBalance += Math.floor(Math.random() * 10) + 1;
+  updateDisplay();
+}
+
+function combineBalances() {
+  combinedMode = true;
+  coinBalance = Math.floor(ethBalance * 100) + coinBalance;
+  updateDisplay();
+}
+
+document.getElementById('connectButton').addEventListener('click', connectMetaMask);
+document.getElementById('getCoinButton').addEventListener('click', getCoin);
+document.getElementById('combineButton').addEventListener('click', combineBalances);
+
+updateDisplay();
+scheduleMidnightReset();
+</script>
+
+<a href="index.html">← Back to Home</a>
+</body>
+</html>

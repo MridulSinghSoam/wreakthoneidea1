@@ -1,0 +1,49 @@
+<!-- breaks.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mandatory Breaks</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #cfd9df, #e2ebf0);
+    cursor: url('https://cur.cursors-4u.net/cursor.png'), auto;
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #03a9f4;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: #0288d1;
+  }
+  #timer { font-size: 2rem; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<h1>Mandatory Productivity Breaks</h1>
+<p>Work 15 seconds, break forever.</p>
+<div id="timer">15</div>
+<script>
+let time = 15;
+setInterval(() => {
+  time--;
+  document.getElementById('timer').innerText = time;
+  if (time <= 0) alert('Time’s up! Take a break.');
+}, 1000);
+</script>
+<a href="index.html">← Back to Home</a>
+</body>
+</html>

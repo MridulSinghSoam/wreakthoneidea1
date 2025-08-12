@@ -1,0 +1,79 @@
+<!-- navigation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bad Navigation</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    cursor: url('https://cur.cursors-4u.net/cursor.png'), auto;
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #8e24aa;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: #6a1b9a;
+  }
+  input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  #map {
+    height: 400px;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+<h1>Bad Navigation Mode</h1>
+<p>Enter a destination to get the second-worst route possible.</p>
+<input type="text" id="destination" placeholder="Where to?">
+<button onclick="navigate()">Get Directions</button>
+<p id="route"></p>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+let map = L.map('map').setView([0, 0], 2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19
+}).addTo(map);
+
+navigator.geolocation.getCurrentPosition(pos => {
+  const { latitude, longitude } = pos.coords;
+  map.setView([latitude, longitude], 13);
+  L.marker([latitude, longitude]).addTo(map).bindPopup('You are here').openPopup();
+});
+
+function navigate(){
+  let dest = document.getElementById('destination').value;
+  let randomLat = (Math.random() * 180 - 90).toFixed(5);
+  let randomLng = (Math.random() * 360 - 180).toFixed(5);
+  document.getElementById('route').innerText = `Directions to ${dest}: First head in the wrong direction, then somehow end up here → (${randomLat}, ${randomLng}).`;
+  L.marker([randomLat, randomLng]).addTo(map).bindPopup(`Totally wrong destination for ${dest}`).openPopup();
+  map.setView([randomLat, randomLng], 5);
+}
+</script>
+<a href="index.html">← Back to Home</a>
+</body>
+</html>
